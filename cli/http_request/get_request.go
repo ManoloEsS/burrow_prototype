@@ -3,9 +3,7 @@ package httprequest
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
-	"strings"
 )
 
 func httpGetRequest(ctx context.Context, client *http.Client, reqParams *UserRequest) (*http.Response, error) {
@@ -27,38 +25,4 @@ func httpGetRequest(ctx context.Context, client *http.Client, reqParams *UserReq
 	}
 
 	return res, nil
-}
-
-func getBodyContents(reqBody Body) io.Reader {
-	switch reqBody.Type {
-	case "text":
-		return strings.NewReader(reqBody.Content)
-	default:
-		return nil
-	}
-}
-
-func addRequestParameters(httpRequest *http.Request, params map[string]string) {
-	if len(params) > 0 {
-		q := httpRequest.URL.Query()
-		for k, v := range params {
-			q.Add(k, v)
-		}
-		httpRequest.URL.RawQuery = q.Encode()
-	}
-}
-
-func addRequestHeaders(httpRequest *http.Request, headers map[string]string) {
-	if len(headers) > 0 {
-		for k, v := range headers {
-			httpRequest.Header.Add(k, v)
-		}
-	}
-}
-
-func addRequestAuth(httpRequest *http.Request, auth *Auth) {
-	if auth != nil {
-
-	}
-
 }
