@@ -5,7 +5,7 @@ type UserRequest struct {
 	Method string
 	Auth
 	Body
-	Url     string
+	URL     string
 	Params  map[string]string
 	Headers map[string]string
 }
@@ -28,4 +28,3 @@ type Body struct {
 type RequestErrorMsg struct {
 	Err error
 }
-
